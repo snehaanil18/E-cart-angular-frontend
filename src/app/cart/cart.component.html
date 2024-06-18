@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-8 ms-4">
+        <table class="my-2 mx-2 shadow text-center border  table table-bordered">
+            <thead style="background-color: darkgray;">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Item</th>
+                <th scope="col">Image</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let data of product">
+                <tr>
+                    <td>%</td>
+                    <td>{{data.id}} </td>
+                    <td style="width: 370px;">{{data.title}} </td>
+                    <td><img width="100px" height="120px" [src]=data.image alt=""></td>
+                    <td>
+                        <div class="text-center">
+                            <button (click)="decrementProduct(data.id)" class="btn">-</button>
+                            <input style="max-width: 30px;" [placeholder]=data.quantity type="text" readonly>
+                            <button (click)="incrementProduct(data.id)" class="btn">+</button>
+                        </div>
+
+                    </td>
+                    <td>${{data.grandTotal}} </td>
+                    <td ><button (click)="deleteProduct(data.id)" class="btn"><img height="20px" src="https://cdn-icons-png.flaticon.com/512/1869/1869668.png" alt=""></button></td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+    <div class="col-3 ms-4 ">
+        <div class="container text-center p-3 mt-4 shadow">
+            <h3>Cart Summary</h3>
+            <h3>Total: ${{totalPrice}} </h3>
+            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success w-50">Checkout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Payment Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+                <input type="text" placeholder="Name" class="form-control mb-3">
+                <input type="text" placeholder="Address" class="form-control mb-3">
+                <input type="text" placeholder="Phone Number" class="form-control mb-3">
+                <p>Amount to Pay : ${{totalPrice}}</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button (click)="payment()" type="button" class="btn btn-success">Payment</button>
+          <div *ngIf="paymentStatus">
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- empty Cart -->
+<div *ngIf="product.length==0" class="text-center">
+    <img height="300px" src="https://static.vecteezy.com/system/resources/previews/005/006/007/non_2x/no-item-in-the-shopping-cart-click-to-go-shopping-now-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg" alt="">
+    <p>Your Cart is Empty</p>
+    <button routerLink="/" class="btn btn-success mb-5">View More</button>
+</div>
+

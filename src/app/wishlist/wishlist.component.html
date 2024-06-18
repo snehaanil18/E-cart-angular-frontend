@@ -1,0 +1,35 @@
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+            <div *ngFor="let data of product" class="col mb-5">
+                <div  class="card h-100">
+                    <!-- Product image-->
+                    <img width="100%" height="300px" class="card-img-top" [src]=data.image alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{data.title}} </h5>
+                            <!-- Product price-->
+                            ${{data.price}}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <button (click)="deleteProduct(data.id)" class="btn btn-outline-dark mt-auto"><i class="fa-solid fa-trash text-danger"></i></button>
+                            <button (click)="addToCart(data)" class="btn btn-outline-dark mt-auto ms-2"><i class="fa-solid fa-cart-plus text-success"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- empty Wishlist -->
+<div *ngIf="product.length==0" class="text-center">
+    <img height="300px" src="https://static.vecteezy.com/system/resources/previews/016/142/963/non_2x/wishlist-icon-in-comic-style-like-document-cartoon-illustration-on-white-isolated-background-favorite-list-splash-effect-business-concept-vector.jpg" alt="">
+    <p>Your Wishlist is Empty</p>
+    <button routerLink="/" class="btn btn-success mb-5">View More</button>
+</div>

@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-6">
+        <img width="100%" src="https://i.pinimg.com/originals/5a/d0/47/5ad047a18772cf0488a908d98942f9bf.gif" alt="">
+    </div>
+    <div style="background-color: rgb(219, 226, 233);" class="col-6 py-3 px-5">
+        <div class="container bg-light p-5 mt-3 border shadow">
+            <h2 style="font-family: Cactus Classical Serif;" class="text-center p-3">Register Here</h2>
+            <form [formGroup]="registerForm">
+
+                <label class="form-label" for="form2Example1">Username</label>
+                  <input formControlName="username" type="text"  class="form-control" />
+                  <div *ngIf="this.registerForm.get('username')?.errors && this.registerForm.get('username')?.touched" class="text-danger fw-bolder">*Invalid Username</div>
+
+                <label class="form-label mt-2" for="form2Example1">Email address</label>
+                  <input formControlName="email" type="email" id="form2Example1" class="form-control" email/>
+                  <div *ngIf="this.registerForm.get('email')?.errors && this.registerForm.get('email')?.touched" class="text-danger fw-bolder">*Invalid Email</div>
+
+                  <label class="form-label mt-2" for="form2Example2">Password</label>
+                  <input formControlName="password" type="password" id="form2Example2" class="form-control" />
+                  <div *ngIf="this.registerForm.get('password')?.errors && this.registerForm.get('password')?.touched" class="text-danger fw-bolder">*Invalid Password</div>
+
+                <div class="row mt-2 mb-4">
+                  <div class="col d-flex justify-content-start">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                      <label class="form-check-label" for="form2Example31"> Remember me </label>
+                    </div>
+                  </div>
+                  <div class="col d-flex justify-content-end ">
+                    <!-- Simple link -->
+                    <a href="#!">Forgot password?</a>
+                  </div>
+                </div>
+              
+                <!-- Submit button -->
+                 <div class="text-center p-3">
+                    <button (click)="register()" type="button" class="btn btn-primary">Register</button>
+                 </div>
+        
+              
+                <!-- Register buttons -->
+                <div class="text-center">
+                  <p>Already Registered? <a routerLink="/user/login">Login</a></p>
+                </div>
+              </form>
+
+        </div>
+    </div>
+</div>
+
